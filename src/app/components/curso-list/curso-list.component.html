@@ -4,7 +4,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="Buscar por title"
+        placeholder="Buscar por título"
         [(ngModel)]="title"
       />
       <div class="input-group-append">
@@ -19,28 +19,35 @@
     </div>
   </div>
   <div class="col-md-6">
-    <h4>Listado Cursos</h4>
+    <style>
+        h2 {
+            color: black;
+            font-family: Trebuchet MS;
+            text-align: center;
+        }
+    </style>
+    <h2>Listado de Cursos</h2>
     <ul class="list-group">
       <li
-        class="list-group-item"
+        class="list-group-item custom-list-item"
         *ngFor="let curso of cursos; let i = index"
         [class.active]="i == currentIndex"
         (click)="setActiveElement(curso, i)"
       >
-        {{ curso.nombre }} 
-        <div *ngIf="curso.tema">
-        	({{ curso.tema.nombre }})
-        </div> 
+        <h5> {{ curso.nombre }} </h5> 
+        <div *ngIf="curso.tema" class="course-theme">
+          ({{ curso.tema.nombre }})
+        </div>     
       </li>
     </ul>
     <button class="m-3 btn btn-sm btn-danger" disabled (click)="removeAllElements()">
-      Remove All
+      Eliminar
     </button>
   </div>
-<div class="col-md-6">
-  <app-curso-details
-  [viewMode]="true"
-  [currentElement]="currentElement"
-></app-curso-details>
-</div>
+  <div class="col-md-6">
+    <app-curso-details
+      [viewMode]="true"
+      [currentElement]="currentElement"
+    ></app-curso-details>
+  </div>
 </div>

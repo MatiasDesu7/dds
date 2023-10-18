@@ -9,6 +9,7 @@ import { CursoAddComponent } from './components/curso-add/curso-add.component';
 import { CursoListComponent } from './components/curso-list/curso-list.component';
 import { CursoDetailsComponent } from './components/curso-details/curso-details.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,7 @@ import { CursoDetailsComponent } from './components/curso-details/curso-details.
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

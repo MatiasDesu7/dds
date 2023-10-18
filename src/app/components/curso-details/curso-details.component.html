@@ -19,17 +19,19 @@
       class="badge badge-warning"
       routerLink="/cursos/{{ currentElement.id }}"
     >
-      Edit
+      Editar
     </a>
   </div>
   <div *ngIf="!currentElement">
     <br />
-    <p>Please click on a Post...</p>
+    <p>Haz clic en un post...</p>
   </div>
 </div>
+
 <ng-template #editable>
   <div *ngIf="currentElement.id" class="edit-form">
     <h4>Instituto educativo - Curso</h4>
+    
     <form>
       <div class="form-group">
         <label for="title">Nombre del curso</label>
@@ -56,18 +58,22 @@
         {{ currentElement.idDocente == 0 ? "" : currentElement.idDocente }}
       </div>
     </form>
+    
     <button class="badge badge-danger mr-2" (click)="deleteElement()">
-      Delete
+      Borrar
     </button>
+    
     <button
       type="submit"
       class="badge badge-success mb-2"
       (click)="updateElement()"
     >
-      Update
+      Actualizar
     </button>
+    
     <p>{{ message }}</p>
   </div>
+  
   <div *ngIf="!currentElement.id">
     <br />
     <p>Elemento no encontrado...</p>

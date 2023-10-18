@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Curso } from 'src/app/models/curso.model';
 import { CursoService } from 'src/app/services/curso.service';
 
-
 @Component({
   selector: 'app-curso-list',
   templateUrl: './curso-list.component.html',
@@ -49,15 +48,23 @@ export class CursoListComponent implements OnInit {
       });
   }
   searchTitle(): void {
-    this.currentElement = <Curso>{};
+    this.currentElement = {}; // Limpiamos el resultado anterior
     this.currentIndex = -1;
-    this.cursoService.findByTitle(this.title)
-      .subscribe({
-        next: (data) => {
-          this.currentElement = data;
-          console.log(data);
-        },
-        error: (e) => console.error(e)
-      });
+    
+    if (this.title.trim() !== '') { // Verificamos si el título no está vacío
+      this.cursoService.findByTitle(this.title)
+        .subscribe({
+          next: (data) => {
+            this.cursos = [data]; // Asignamos el resultado a la lista de cursos
+            console.log(data);
+          },
+          error: (e) => console.error(e)
+        });
+    } else {
+      // Si el título está vacío, volvemos a cargar todos los cursos
+      this.retrieveCursos();
+    }
   }
+  
+  
 }

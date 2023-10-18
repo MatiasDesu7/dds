@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Curso } from '../models/curso.model';
+import { map } from 'rxjs/operators';
 
 const baseUrl = 'http://localhost:4200/api/cursos';
 //const baseUrl = 'http://localhost:8080/cursos';
@@ -19,7 +20,9 @@ export class CursoService {
   }
   get(id: any): Observable<Curso> {
     return this.http.get<Curso>(`${baseUrl}/${id}`);
-  }
+    }
+    
+    
   create(data: any): Observable<any> {
 	console.log(data);
 	//Conversione a form data
@@ -36,7 +39,7 @@ export class CursoService {
     	"nombre": data.nombre,
     	"fechaInicio": data.fechaInicio,
     	"idDocente": data.idDocente ,
-    	"tema": data.tema
+    	/* "tema": data.tema */
 	};
     return this.http.put(`${baseUrl}`, bodyData, {responseType: 'text'});
   }
@@ -46,7 +49,23 @@ export class CursoService {
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
   }
+  
   findByTitle(nombre: any): Observable<Curso> {
     return this.http.get<Curso>(`${baseUrl}?nombre=${nombre}`);
   }
+  
+   getLastId(): Observable<number> {
+    return this.http.get<number>(`${baseUrl}/lastId`).pipe(
+      map((id: number) => id + 1)
+    );
+  }
+
+  obtenerUltimoId(): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/ultimo_id`);
+  }
+  
+  obtenerCursoPorIdTema(temaid: number): Observable<any[]> {
+    return this.http.get<any[]>(`${baseUrl}?idTema=${temaid}`)}
+
+  
 }

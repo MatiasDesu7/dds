@@ -12,6 +12,29 @@
           name="title"
         />
       </div>
+
+      <div class="form-group">
+        <label for="docente">Docente</label>
+        <select class="form-control" id="docente" required [(ngModel)]="curso.idDocente">
+        <option value="0">Seleccione un docente</option>
+        <option value="1">Sergio Viera</option>
+        <option value="2">Santiago Ragazzo</option>
+        <option value="3">Marcelo Bandino</option>
+        </select>
+        <p>ID del profesor seleccionado: {{ curso.idDocente }}</p>
+      </div>
+      
+      
+
+      <div class="form-group">
+        <label for="material">Materiales</label>
+        <ul>
+        <li *ngFor="let materialT of materialesTema">
+        <input type="radio" [value]="materialT.id" [(ngModel)]="selectedMaterialId" disabled>
+        {{ materialT.titulo }}
+        </li>
+      </ul>
+
       <div class="form-group">
         <label for="content">Fecha inicio</label>
         <input
